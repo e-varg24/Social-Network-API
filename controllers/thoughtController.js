@@ -12,13 +12,13 @@ module.exports = {
                 return res.status(500).json(err);
             });
     },
-    // Get a single thought by id
+    // Gets single thought by id
     getSingleThought (req, res) {
         Thought.findOne({ _id: req.params.thoughtId })
             .select('-__v')
             .then((thought) =>
                 !thought
-                    ? res.status(404).json({ message: 'No thought with this id found' })
+                    ? res.status(404).json({ message: 'cant find thought with this id' })
                     : res.json(thought)
             )
             .catch((err) => {
@@ -38,7 +38,7 @@ module.exports = {
             })
             .then((user) =>
                 !user
-                    ? res.status(404).json({ message: "Thought created but no user with this id found" })
+                    ? res.status(404).json({ message: "Thought has been created but no user with this id found" })
                     : res.json({
                         updatedUser: user,
                         message: 'Thought added to user'
@@ -58,7 +58,7 @@ module.exports = {
         )
             .then((thought) =>
                 !thought
-                    ? res.status(404).json({ message: 'No thought with this id found' })
+                    ? res.status(404).json({ message: 'cant find thought with this id' })
                     : res.json({
                         updatedThought: thought,
                         message: 'Thought updated'
@@ -74,7 +74,7 @@ module.exports = {
         Thought.findOneAndDelete({ _id: req.params.thoughtId })
             .then((thought) =>
                 !thought
-                    ? res.status(404).json({ message: 'No thought with this id found' })
+                    ? res.status(404).json({ message: 'cant find thought with this id' })
                     : User.findOneAndUpdate(
                         { thoughts: req.params.thoughtId },
                         { $pull: { thoughts: { thoughtId: req.params.thoughtId } } },
@@ -99,7 +99,7 @@ module.exports = {
         )
             .then((thought) =>
                 !thought
-                    ? res.status(404).json({ message: 'No thought with this id found' })
+                    ? res.status(404).json({ message: 'cant find thought with this id' })
                     : res.json({
                         updatedThought: thought,
                         message: 'Reaction created and added to thought' })
@@ -117,7 +117,7 @@ module.exports = {
         )
             .then((thought) =>
                 !thought
-                    ? res.status(404).json({ message: 'No thought with this id found' })
+                    ? res.status(404).json({ message: 'cant find thought with this id' })
                     : res.json({
                         updatedThought: thought,
                         message: 'Reaction deleted and removed from thought'
