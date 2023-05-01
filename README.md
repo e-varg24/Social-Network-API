@@ -16,6 +16,7 @@ This is a Api backend database for a social network. With mongoose,express and t
 - npm run start
 
 ## Screen shot
+![Screenshot (89)](https://user-images.githubusercontent.com/116539782/235528865-54356364-24db-4fa6-b43e-35b311994902.png)
 
 
 ## video
